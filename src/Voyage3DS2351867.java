@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /*  TP1
  *  Cours 420-201 - Introduction à la programmation
  *  Groupe : 3 – mardi & vendredi
@@ -7,9 +5,20 @@ import java.util.Scanner;
  *  Prénom : Dimitri
  *  DA : 2351867
  */
+
+import java.util.Scanner;
+
 public class Voyage3DS2351867 {
     public Voyage3DS2351867() {
+        tester_afficherInfoVoyage();
         demanderInfosEtAfficherVoyage();
+    }
+
+    public String to2Decimal(double value) {
+        String strFormatAvec2Decimales;
+        java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
+        strFormatAvec2Decimales = df.format(value);
+        return strFormatAvec2Decimales;
     }
 
     private void demanderInfosEtAfficherVoyage() {
@@ -39,14 +48,14 @@ public class Voyage3DS2351867 {
     }
 
     private void afficherInfoVoyage(double distance, double temps, double prixEssence, double litreEssence) {
-        double vitesseMoyenne;
-        double consommationMoyenneAu100Km;
-        double prixVoyage;
+        String vitesseMoyenne;
+        String consommationMoyenneAu100Km;
+        String prixVoyage;
         String str;
 
-        vitesseMoyenne = calculerVitesseMoyenne(distance, temps);
-        consommationMoyenneAu100Km = calculerConsommationAu100Km(litreEssence, distance);
-        prixVoyage = calculerPrixVoyage(litreEssence, prixEssence);
+        vitesseMoyenne = to2Decimal(calculerVitesseMoyenne(distance, temps));
+        consommationMoyenneAu100Km = to2Decimal(calculerConsommationAu100Km(litreEssence, distance));
+        prixVoyage = to2Decimal(calculerPrixVoyage(litreEssence, prixEssence));
         str = "==================================================================\n";
         str += "Vous avez parcouru " + distance + " km en " + temps + " heures.\n";
         str += "Le prix de l'essence est de $" + prixEssence + ".\n";
@@ -79,18 +88,20 @@ public class Voyage3DS2351867 {
         return consommation;
     }
 
+    /**
+     * Lit une chaine de caractère au clavier et la retourne.
+     *
+     * @param question la question affichée pour l'utilisateur
+     * @return la réponse saisit par l'utilisateur
+     */
     private String lireString(String question) {
         Scanner sc;
         String reponse;
 
         sc = new Scanner(System.in);
-        afficherQuestion(question);
+        System.out.print(question);
         reponse = sc.nextLine();
         return reponse;
-    }
-
-    private void afficherQuestion(String str) {
-        System.out.print(str);
     }
 
     public static void main(String[] args) {
